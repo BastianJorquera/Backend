@@ -1,5 +1,5 @@
 Backend de e-commerce, contiene las siguiente funcionalidades:<br>
-Conección a BD.<br>
+Conexión a BD.<br>
 Carga de modelos.<br>
 Permite registrar usuarios (encriptando la contraseña). <br>
 Permite iniciar sesión (comparando la contraseña encriptada). <br>
