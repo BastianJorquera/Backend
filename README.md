@@ -26,7 +26,7 @@ Protege rutas mediante middleware.
 
 1.  Asegúrate de que tu servicio de PostgreSQL esté corriendo.
 2.  Usando una herramienta como PgAdmin o `psql`, crea una nueva base de datos vacía. (ej. `card_hunters_db`).
-3.  **Importante:** Abre el archivo `/db/init.sql` de este proyecto, copia su contenido y ejecútalo en la base de datos que acabas de crear. Esto creará todas las tablas y relaciones necesarias.
+3.  **Importante:** Abre el archivo `/db/schema.sql` de este proyecto, copia su contenido y ejecútalo en la base de datos que acabas de crear. Esto creará todas las tablas y relaciones necesarias.
 
 ### 4. Variables de Entorno
 
