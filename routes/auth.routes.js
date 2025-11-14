@@ -8,7 +8,7 @@ const { Usuario } = require('../models'); // Importamos el modelo Usuario desde 
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
     // Obtenemos los datos del cuerpo de la petición
-    const { nombre_usuario, correo, contraseña, tipo_usuario } = req.body;
+    const { nombre_usuario, correo, telefono, contraseña, tipo_usuario, foto_perfil } = req.body;
 
     try {
         // 1. Verificar si el correo ya existe
@@ -25,9 +25,11 @@ router.post('/register', async (req, res) => {
         user = await Usuario.create({
             nombre_usuario: nombre_usuario,
             correo: correo,
+            telefono: telefono,
             contraseña: hashedPassword, // Guardamos la contraseña encriptada
             tipo_usuario: tipo_usuario || 'comprador', // Si no se especifica, es 'comprador'
-            fecha_registro: new Date() // Usamos la fecha actual
+            fecha_registro: new Date(), // Usamos la fecha actual
+            foto_perfil: foto_perfil || null
         });
 
         // 4. Crear el Payload para el JWT (la info que guardará el token)

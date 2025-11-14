@@ -28,4 +28,62 @@ router.get('/me', authMiddleware, async (req, res) => {
     }
 });
 
+// --- RUTA PARA ACTUALIZAR EL PERFIL DEL USUARIO ---
+// PUT /api/users/me
+router.put('/me', authMiddleware, async (req, res) => {
+  try {
+    console.log('Datos recibidos para actualización:', req.body);
+    const user = await Usuario.findByPk(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ msg: 'Usuario no encontrado' });
+    }
+
+    // Solo permitimos actualizar ciertos campos
+    //AGREGAR CAMPOS SEGUN MODELO USUARIO
+    const { nombre_usuario, correo, telefono, foto_perfil } = req.body;
+
+    if (nombre_usuario) user.nombre_usuario = nombre_usuario;
+    if (correo) user.correo = correo;
+    if (telefono) user.telefono = telefono;
+    if (foto_perfil) user.foto_perfil = foto_perfil;
+
+    await user.save();
+
+    // Retornamos el nuevo usuario sin contraseña
+    res.json({
+      msg: 'Perfil actualizado correctamente',
+      user: {
+        id_usuario: user.id_usuario,
+        nombre_usuario: user.nombre_usuario,
+        correo: user.correo,
+        telefono: user.telefono,
+        foto_perfil: user.foto_perfil
+      }
+    });
+
+  } catch (err) {
+    console.error('Error al actualizar perfil:', err);
+    res.status(500).send('Error en el servidor');
+  }
+});
+
+// --- RUTA PARA ELIMINAR EL PERFIL DEL USUARIO ---
+// DELETE /api/users/me
+router.delete('/me', authMiddleware, async (req, res) => {
+    try{
+        const user = await Usuario.findByPk(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({ msg: 'Usuario no encontrado' });
+        }
+        await user.destroy();
+        res.json({ msg: 'Usuario eliminado correctamente' });
+
+    } catch (err) {
+        console.error('Error al eliminar usuario:', err);
+        res.status(500).send('Error en el servidor');
+    }
+});
+
 module.exports = router;
