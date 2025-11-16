@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware'); // 1. Importamos el "guardia"
 const { Usuario } = require('../models'); // Importamos el modelo de Usuario
+const bcrypt = require('bcryptjs');
 
 // --- RUTA PARA OBTENER EL PERFIL DEL USUARIO ---
 // GET /api/users/me
@@ -84,6 +85,43 @@ router.delete('/me', authMiddleware, async (req, res) => {
         console.error('Error al eliminar usuario:', err);
         res.status(500).send('Error en el servidor');
     }
+});
+
+// --- RUTA PARA CAMBIAR CONTRASEÑA ---
+// PUT /api/users/change-password
+router.put('/change-password', authMiddleware, async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({ msg: 'Debe enviar la contraseña actual y la nueva.' });
+    }
+
+    // Buscar usuario por el id que viene del token (authMiddleware)
+    const user = await Usuario.findByPk(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ msg: 'Usuario no encontrado' });
+    }
+
+    // Verificar contraseña actual
+    const passwordMatch = await bcrypt.compare(oldPassword, user.contraseña);
+    if (!passwordMatch) {
+      return res.status(400).json({ msg: 'La contraseña actual no es correcta.' });
+    }
+
+    // Hashear nueva contraseña
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    user.contraseña = hashedPassword;
+    await user.save();
+
+    res.json({ msg: 'Contraseña actualizada correctamente.' });
+  } catch (err) {
+    console.error('Error al cambiar contraseña:', err);
+    res.status(500).send('Error en el servidor');
+  }
 });
 
 module.exports = router;
