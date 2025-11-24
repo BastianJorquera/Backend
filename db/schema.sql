@@ -195,6 +195,23 @@ CREATE TABLE IF NOT EXISTS public."Carrito"
         ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
--- Se eliminaron todos los ALTER TABLE incorrectos que estaban al final.
 
 END;
+
+
+-- Nueva actualización para importar base de datos de Pokemon TCG
+
+-- 1. Agregamos columnas nuevas
+ALTER TABLE public."Carta"
+ADD COLUMN id_api_externa text UNIQUE, -- El ID único de la API (ej: 'xy1-1')
+ADD COLUMN nombre_set text,            -- El nombre del set (ej: 'Base')
+ADD COLUMN numero_carta text;          -- El número dentro del set (ej: '1/102')
+
+-- 2. (Opcional pero recomendado) Agregar índice para búsquedas más rápidas
+CREATE INDEX idx_carta_api_id ON public."Carta"(id_api_externa);
+
+-- 3. Asegúrate de tener la franquicia 'Pokémon' creada
+-- Si aún no la tienes, ejecútalo y ANOTA el id_franquicia que te genere
+INSERT INTO public."Franquicia" (nombre, descripcion, imagen)
+VALUES ('Pokémon', 'TCG', 'logo.png')
+ON CONFLICT DO NOTHING;
