@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS public."Usuario"
     "contraseña" text NOT NULL,
     tipo_usuario text NOT NULL,
     fecha_registro date NOT NULL,
-    PRIMARY KEY (id_usuario)
+    PRIMARY KEY (id_usuario),
+    telefono text,
+    foto_perfil text
 );
 
 COMMENT ON COLUMN public."Usuario".tipo_usuario

@@ -26,7 +26,7 @@ async function sincronizarCartas() {
     // NOTA: Para prueba pedimos solo el "Base Set" (id: base1) para no traer 15.000 cartas de golpe.
     // En el futuro puedes quitar el filtro 'q' para traer todo (necesitarás paginación).
     const response = await axios.get(API_URL, {
-      params: { q: 'set.id:basep' },  //puedes cambiar "base1" por cualquier otra
+      params: { q: 'set.id:base1' },  //puedes cambiar "base1" por cualquier otra
       headers: { 'X-Api-Key': process.env.POKEMON_API_KEY || '' }
     });
 
