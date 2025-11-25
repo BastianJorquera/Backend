@@ -9,6 +9,12 @@ const sequelize = new Sequelize(
         host: process.env.DB_HOST,
         dialect: 'postgres',
         logging: false, // Puedes establecer a true para ver las consultas SQL en la consola
+        dialectOptions: {
+            ssl: {
+                require: true, // Obliga a usar SSL
+                rejectUnauthorized: false // Acepta el certificado de AWS sin validación estricta (necesario para RDS)
+            }
+        }
     }
 );
 
