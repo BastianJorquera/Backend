@@ -12,8 +12,8 @@ const sequelize = new Sequelize(
         logging: false, // Puedes establecer a true para ver las consultas SQL en la consola
         dialectOptions: {
             ssl: {
-                require: true,
-                rejectUnauthorized: false // Perfecto para AWS RDS desde localhost
+                require: true, // Obliga a usar SSL
+                rejectUnauthorized: false // Acepta el certificado de AWS sin validación estricta (necesario para RDS)
             }
         }
     }

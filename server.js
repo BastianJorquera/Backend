@@ -20,7 +20,8 @@ const cartasRoutes = require('./routes/cartas.routes');
 connectDB(); 
 
 // Middlewares
-app.use(cors());
+//app.use(cors());
+app.use(cors({ origin: 'http://localhost:8100'}));
 app.use(express.json());
 
 // Rutas
