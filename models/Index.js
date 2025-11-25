@@ -27,12 +27,12 @@ Franquicia.hasMany(Carta, { foreignKey: 'id_franquicia' });
 Carta.belongsTo(Franquicia, { foreignKey: 'id_franquicia' });
 
 // Relación Publicacion <-> Usuario (Vendedor)
-Usuario.hasMany(Publicacion, { foreignKey: 'id_usuario' });
-Publicacion.belongsTo(Usuario, { foreignKey: 'id_usuario' });
+Usuario.hasMany(Publicacion, { foreignKey: 'id_usuario', as: 'Publicaciones' });
+Publicacion.belongsTo(Usuario, { foreignKey: 'id_usuario', as: 'usuario' });
 
 // Relación Publicacion <-> Carta (es 1-a-1 porque 'id_carta' es UNIQUE)
-Carta.hasOne(Publicacion, { foreignKey: 'id_carta' });
-Publicacion.belongsTo(Carta, { foreignKey: 'id_carta' });
+Carta.hasOne(Publicacion, { foreignKey: 'id_carta', as: 'publicacion' });
+Publicacion.belongsTo(Carta, { foreignKey: 'id_carta', as: 'carta' });
 
 // Relación Transaccion <-> Publicacion
 Publicacion.hasMany(Transaccion, { foreignKey: 'id_publicacion' });

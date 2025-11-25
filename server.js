@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -13,7 +12,9 @@ const PORT = process.env.PORT || 3000;
 
 // --- AÑADIR ESTAS LÍNEAS ---
 const authRoutes = require('./routes/auth.routes');
-const userRoutes = require('./routes/user.routes'); // <-- NUEVA LÍNEA
+const userRoutes = require('./routes/user.routes');
+const publicacionesRoutes = require('./routes/publicaciones.routes');
+const cartasRoutes = require('./routes/cartas.routes');
 
 // Conectar a la base de datos
 connectDB(); 
@@ -27,19 +28,11 @@ app.get('/', (req, res) => {
     res.send('¡Backend funcionando!');
 });
 
-// Tus otras rutas...
+// Otras rutas
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes); // <-- NUEVA LÍNEA
-
-// Ejemplo de cómo usar un modelo en una ruta
-app.get('/api/cartas', async (req, res) => {
-    try {
-        const cartas = await Carta.findAll(); 
-        res.json(cartas);
-    } catch (err) {
-        res.status(500).send('Error en el servidor');
-    }
-});
+app.use('/api/users', userRoutes);
+app.use('/api/publicaciones', publicacionesRoutes);
+app.use('/api/cartas', cartasRoutes);
 
 
 app.listen(PORT, () => {

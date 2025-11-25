@@ -26,7 +26,20 @@ module.exports = (sequelize) => {
         imagen_carta: {
             type: DataTypes.TEXT,
             allowNull: false
+        },
+        id_api_externa: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        nombre_set: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        numero_carta: {
+            type: DataTypes.TEXT,
+            allowNull: true
         }
+
     }, {
         tableName: 'Carta',
         timestamps: false
