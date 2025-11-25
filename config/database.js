@@ -7,8 +7,15 @@ const sequelize = new Sequelize(
     process.env.DB_PASSWORD,
     {
         host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
         dialect: 'postgres',
         logging: false, // Puedes establecer a true para ver las consultas SQL en la consola
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false // Perfecto para AWS RDS desde localhost
+            }
+        }
     }
 );
 
