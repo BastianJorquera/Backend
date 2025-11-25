@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
         },
         telefono: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
         contraseña: {
             type: DataTypes.TEXT,

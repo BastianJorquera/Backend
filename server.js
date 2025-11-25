@@ -19,7 +19,8 @@ const userRoutes = require('./routes/user.routes'); // <-- NUEVA LÍNEA
 connectDB(); 
 
 // Middlewares
-app.use(cors());
+//app.use(cors());
+app.use(cors({ origin: 'http://localhost:8100'}));
 app.use(express.json());
 
 // Rutas
