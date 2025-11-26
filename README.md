@@ -1,11 +1,16 @@
 ## Backend de e-commerce, contiene las siguiente funcionalidades:<br>
 
-Conexión a BD.<br>
+Conexión a BD con AWS.<br>
 Carga de modelos.<br>
 Permite registrar usuarios (encriptando la contraseña). <br>
 Permite iniciar sesión (comparando la contraseña encriptada). <br>
 Genera tokens JWT.<br>
-Protege rutas mediante middleware.
+Protege rutas mediante middleware.<br>
+Endpoints:
+
+Usuario (register, login, me): Registrar Usuario (post), Login (get), Actualizar datos (put), Eliminar usuario (delete)
+Publicaciones (me): Crear Publicacion (post), Listar Publicacion (get), Modificar (put) y Eliminar (delete)
+Cartas (search): Obtener pool de cartas (get)
 
 ## Puesta en Marcha del Backend
 
