@@ -8,9 +8,9 @@ Genera tokens JWT.<br>
 Protege rutas mediante middleware.<br>
 Endpoints:
 
-Usuario (register, login, me): Registrar Usuario (post), Login (get), Actualizar datos (put), Eliminar usuario (delete)
-Publicaciones (me): Crear Publicacion (post), Listar Publicacion (get), Modificar (put) y Eliminar (delete)
-Cartas (search): Obtener pool de cartas (get)
+Usuario (register, login, me): Registrar Usuario (post), Login (get), Actualizar datos (put), Eliminar usuario (delete)<br>
+Publicaciones (me): Crear Publicacion (post), Listar Publicacion (get), Modificar (put) y Eliminar (delete)<br>
+Cartas (search): Obtener pool de cartas (get)<br>
 
 ## Puesta en Marcha del Backend
 
