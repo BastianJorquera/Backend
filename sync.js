@@ -8,7 +8,7 @@ const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: process.env.PORT,
+  port: process.env.DB_PORT,
   ssl: {
     rejectUnauthorized: false 
   }
@@ -29,7 +29,7 @@ async function sincronizarCartas() {
     // NOTA: Para prueba pedimos solo el "Base Set" (id: base1) para no traer 15.000 cartas de golpe.
     // En el futuro puedes quitar el filtro 'q' para traer todo (necesitarás paginación).
     const response = await axios.get(API_URL, {
-      params: { q: 'set.id:basep' },  //puedes cambiar "base1" por cualquier otra
+      params: { q: 'set.id:base3' },  //puedes cambiar "base1" por cualquier otra
       headers: { 'X-Api-Key': process.env.POKEMON_API_KEY || '' }
     });
 
